@@ -106,13 +106,13 @@ router.post('/', function(req, res, next) {
 });
 
 //DELETE Delete the specified string
-router.delete('/:_string', function (req, res, next) {
-
-    strings.findOneAndRemove(req.params._string, function (err, result) {
-        if(err) {res.json({message: 'Error deleting'});}
-        else {res.json({message: 'success'});}
+router.delete('/:_str', function (req, res, next) {
+    strings.findOneAndRemove({string: req.params._str}, function (err, doc, results) {
+        if(doc === null) {res.json({message: 'String not found'});}
+        else {res.json({message: 'String deleted.'});}
     })
 });
+
 
 
 module.exports = router;
